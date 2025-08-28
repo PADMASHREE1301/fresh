@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip Card Slideshow</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f4f4f9;
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: 600px;
+      max-width: 90%;
+      aspect-ratio: 4 / 3;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .card-front img, .card-back img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="card-inner" id="card-inner">
+      <div class="card-front">
+        <img id="front-img" src="" alt="Front">
+      </div>
+      <div class="card-back">
+        <img id="back-img" src="" alt="Back">
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="prevCard()" id="prevBtn">Previous</button>
+    <button onclick="nextCard()" id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    const cards = [
+      {
+        front: "C:/Users/HP/Desktop/fresher/pic/pic1a",
+        back: "C:/Users/HP/Desktop/fresher/pic/pic1b"
+      },
+      {
+        front: "C:/Users/HP/Desktop/fresher/pic/pic2a",
+        back: "C:/Users/HP/Desktop/fresher/pic/pic2b"
+      },
+      {
+        front: "C:/Users/HP/Desktop/fresher/pic/pic3a",
+        back: "C:/Users/HP/Desktop/fresher/pic/pic3b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/4a",
+        back: "C:/Users/HP/Desktop/fresher/pic/4b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/5a",
+        back: "C:/Users/HP/Desktop/fresher/pic/5b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/6a",
+        back: "C:/Users/HP/Desktop/fresher/pic/6b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/7a",
+        back: "C:/Users/HP/Desktop/fresher/pic/7b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/8a",
+        back: "C:/Users/HP/Desktop/fresher/pic/8b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/9a",
+        back: "C:/Users/HP/Desktop/fresher/pic/9b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/10a",
+        back: "C:/Users/HP/Desktop/fresher/pic/10b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/11a",
+        back: "C:/Users/HP/Desktop/fresher/pic/11b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/12a",
+        back: "C:/Users/HP/Desktop/fresher/pic/12b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/13a",
+        back: "C:/Users/HP/Desktop/fresher/pic/13b"
+      },
+       {
+        front: "C:/Users/HP/Desktop/fresher/pic/lasta",
+        back: "C:/Users/HP/Desktop/fresher/pic/lastb"
+      }
+    
+    
+    
+    
+    
+    
+    ];
+
+    let currentIndex = 0;
+
+    function showCard(index) {
+      const frontImg = document.getElementById("front-img");
+      const backImg = document.getElementById("back-img");
+      document.querySelector(".card").classList.remove("flipped"); // reset flip
+      frontImg.src = cards[index].front;
+      backImg.src = cards[index].back;
+      document.getElementById("prevBtn").disabled = index === 0;
+      document.getElementById("nextBtn").disabled = index === cards.length - 1;
+    }
+
+    function nextCard() {
+      if (currentIndex < cards.length - 1) {
+        currentIndex++;
+        showCard(currentIndex);
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showCard(currentIndex);
+      }
+    }
+
+    // Initialize first card
+    showCard(currentIndex);
+  </script>
+</body>
+</html>
