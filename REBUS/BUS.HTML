@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flashcard Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      width: 450px;
+    }
+    .card {
+      width: 100%;
+      height: 350px;
+      margin: auto;
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .card img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .controls {
+      margin-top: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: 2px solid black;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .progress {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .answer {
+      margin-top: 20px;
+      font-size: 50px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="progress" id="progress"></div>
+    <div class="card" id="card">
+      <div id="front"></div>
+    </div>
+    <div class="controls">
+      <button onclick="prevCard()">Prev</button>
+      <button onclick="showAnswer()">Show Answer</button>
+      <button onclick="nextCard()">Next</button>
+    </div>
+    <div class="answer" id="answer"></div>
+  </div>
+
+  <script>
+    const cards = [
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/ONLINE.png" alt="Front 1">', 
+        answer: 'ONLINE' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/VIEW_ONCE.png" alt="Front 2">', 
+        answer: 'VIEW ONCE' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/BINARY_CODE.png" alt="Front 3">', 
+        answer: 'BINARY CODE' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/L.png" >', 
+        answer: 'ELBOW' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/ENCRYPTION.png">', 
+        answer: 'END TO END ENCRYPTION' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/FOREINGN_LANGUAGE.png" ">', 
+        answer: 'FOREIGN LANGUAGE' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/VERIFICATION.png"">', 
+        answer: 'TWO STEP VERIFICATION' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/ONE_IN_A_MILLION.png" ">', 
+        answer: 'ONE IN A MILLION' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/ONCE.jpg" >', 
+        answer: 'ONCE IN A BLUE MOON' 
+      },
+      { 
+        front: '<img src="C:/Users/HP/Desktop/fresher/REBUS/PUZZLE/DISAPPEARING_MESSAGES.png" ">', 
+        answer: 'DISAPPEARING MESSAGES' 
+      }
+    
+    ];
+
+    let currentIndex = 0;
+    const front = document.getElementById("front");
+    const answer = document.getElementById("answer");
+    const progress = document.getElementById("progress");
+
+    function updateCard() {
+      front.innerHTML = cards[currentIndex].front;
+      answer.textContent = ""; // clear old answer
+      progress.textContent = `${currentIndex + 1}/${cards.length}`;
+    }
+
+    function showAnswer() {
+      answer.textContent = cards[currentIndex].answer;
+    }
+
+    function nextCard() {
+      if (currentIndex < cards.length - 1) {
+        currentIndex++;
+        updateCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCard();
+      }
+    }
+
+    updateCard();
+  </script>
+</body>
+</html>
